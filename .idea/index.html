@@ -1,0 +1,541 @@
+<head>
+    <title>Blobio Website</title>
+
+    <!-- Add AngularJS and ngAnimate library -->
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular-animate.min.js"></script>
+    <!-- Add your custom style -->
+    <link rel="stylesheet" href=".idea/style.css">
+
+    <!-- Font Awesome for the "+" and "-" icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <!-- AngularJS application -->
+    <script type="text/javascript" src="app.js"></script>
+
+    <!-- Add viewport meta tag -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Adjust the button-row position -->
+    <style>
+        /* Pulsating effect */
+        @keyframes pulsate {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.1);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        /* Define text gradient and apply pulsating effect for <title> */
+        h1.gradient-text {
+            background: linear-gradient(to right, #4CAF50, #2196F3); /* Gradient from green to blue */
+            -webkit-background-clip: text;
+            color: transparent;
+            display: inline-block;
+            animation: pulsate 5s infinite, gradientCycle 5s infinite, glowPulse 5s infinite; /* Apply synchronized pulsating, gradient, and glow animations */
+            transition: transform 1.5s ease-in-out; /* Add a smooth transition effect on hover */
+            font-family: 'Ubuntu', sans-serif;
+        }
+
+        /* Apply animation on hover for <title> */
+        h1.gradient-text:hover {
+            transform: scale(1.2); /* Scale up the text on hover */
+        }
+
+        /* Center the text and adjust list item markers */
+        body {
+            text-align: center;
+            font-family: 'Ubuntu', sans-serif;
+        }
+
+        /* Full-screen quad for the background */
+        canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: -1;
+            width: 100vw;
+            height: 100vh;
+        }
+
+        /* Glowing effect on the title */
+        h1.glowing-title {
+            position: relative;
+            display: inline-block;
+            font-size: 2em;
+            font-weight: bold;
+            font-family: 'Ubuntu', sans-serif;
+            background: linear-gradient(to right, #4CAF50, #2196F3); /* Gradient from green to blue */
+            -webkit-background-clip: text;
+            color: transparent;
+            animation: pulsate 5s infinite, gradientCycle 5s infinite, glowCycle 5s infinite;
+            transition: transform 0.8s ease-in-out; /* Add a smooth transition effect on hover */
+        }
+
+        h1.glowing-title:hover {
+            transform: scale(1.2); /* Scale up the text on hover */
+        }
+
+        h1.glowing-title span::before {
+            content: attr(data-letter);
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: -1;
+            color: transparent;
+            background: linear-gradient(to right, #4CAF50, #2196F3); /* Gradient from green to blue */
+            -webkit-background-clip: text;
+            clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+            animation: glow 5s infinite; /* Adjust the animation duration as needed */
+        }
+
+        @keyframes gradientCycle {
+            0% {
+                background-position: 0% 0;
+            }
+            50% {
+                background-position: 100% 0;
+            }
+            100% {
+                background-position: 0% 0;
+            }
+        }
+
+        @keyframes glowCycle {
+            0%, 100% {
+                text-shadow: 0 0 10px rgba(76, 175, 80, 0);
+            }
+            50% {
+                text-shadow: 0 0 10px rgba(76, 175, 80, 1.0);
+            }
+        }
+
+        @keyframes glowPulse {
+            0% {
+                text-shadow: 0 0 10px rgba(76, 175, 80, 0);
+            }
+            50%, 100% {
+                text-shadow: 0 0 10px rgba(76, 175, 80, 1.0);
+            }
+        }
+        :root {
+  --glow-rgb: 50 205 50;
+}
+
+body {
+  background: linear-gradient(145deg, rgb(119, 46, 195), rgb(58, 18, 153));
+  height: 100vh;
+  overflow: hidden;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.glow-point {
+  position: absolute;
+  box-shadow: 0rem 0rem 1.2rem 0.6rem rgb(var(--glow-rgb));
+  pointer-events: none;
+}
+
+.star {
+  position: absolute;
+  z-index: 2;
+  color: white;
+  font-size: 1rem;
+  animation-duration: 1500ms;
+  animation-fill-mode: forwards;
+  pointer-events: none;
+}
+
+@keyframes fall-1 {
+  0% {
+    transform: translate(0px, 0px) rotateX(45deg) rotateY(30deg) rotateZ(0deg) scale(0.25);
+    opacity: 0;
+  }
+
+  5% {
+    transform: translate(10px, -10px) rotateX(45deg) rotateY(30deg) rotateZ(0deg) scale(1);
+    opacity: 1;
+  }
+
+  100% {
+    transform: translate(25px, 200px) rotateX(180deg) rotateY(270deg) rotateZ(90deg) scale(1);
+    opacity: 0;
+  }
+}
+
+@keyframes fall-2 {
+  0% {
+    transform: translate(0px, 0px) rotateX(-20deg) rotateY(10deg) scale(0.25);
+    opacity: 0;
+  }
+
+  10% {
+    transform: translate(-10px, -5px) rotateX(-20deg) rotateY(10deg) scale(1);
+    opacity: 1;
+  }
+
+  100% {
+    transform: translate(-10px, 160px) rotateX(-90deg) rotateY(45deg) scale(0.25);
+    opacity: 0;
+  }
+}
+
+@keyframes fall-3 {
+  0% {
+    transform: translate(0px, 0px) rotateX(0deg) rotateY(45deg) scale(0.5);
+    opacity: 0;
+  }
+
+  15% {
+    transform: translate(7px, 5px) rotateX(0deg) rotateY(45deg) scale(1);
+    opacity: 1;
+  }
+
+  100% {
+    transform: translate(20px, 120px) rotateX(-180deg) rotateY(-90deg) scale(0.5);
+    opacity: 0;
+  }
+        :root {
+--glow-rgb: 239 42 201;
+}
+
+body {
+background: linear-gradient(145deg, rgb(119, 46, 195), rgb(58, 18, 153));
+height: 100vh;
+overflow: hidden;
+}
+
+* {
+margin: 0;
+padding: 0;
+box-sizing: border-box;
+}
+
+.glow-point {
+position: absolute;
+box-shadow: 0rem 0rem 1.2rem 0.6rem rgb(var(--glow-rgb));
+pointer-events: none;
+}
+
+.star {
+position: absolute;
+z-index: 2;
+color: white;
+font-size: 1rem;
+animation-duration: 1500ms;
+animation-fill-mode: forwards;
+pointer-events: none;
+}
+
+@keyframes fall-1 {
+0% {
+transform: translate(0px, 0px) rotateX(45deg) rotateY(30deg) rotateZ(0deg) scale(0.25);
+opacity: 0;
+}
+
+5% {
+transform: translate(10px, -10px) rotateX(45deg) rotateY(30deg) rotateZ(0deg) scale(1);
+opacity: 1;
+}
+
+100% {
+transform: translate(25px, 200px) rotateX(180deg) rotateY(270deg) rotateZ(90deg) scale(1);
+opacity: 0;
+}
+}
+
+@keyframes fall-2 {
+0% {
+transform: translate(0px, 0px) rotateX(-20deg) rotateY(10deg) scale(0.25);
+opacity: 0;
+}
+
+10% {
+transform: translate(-10px, -5px) rotateX(-20deg) rotateY(10deg) scale(1);
+opacity: 1;
+}
+
+100% {
+transform: translate(-10px, 160px) rotateX(-90deg) rotateY(45deg) scale(0.25);
+opacity: 0;
+}
+}
+
+@keyframes fall-3 {
+0% {
+transform: translate(0px, 0px) rotateX(0deg) rotateY(45deg) scale(0.5);
+opacity: 0;
+}
+
+15% {
+transform: translate(7px, 5px) rotateX(0deg) rotateY(45deg) scale(1);
+opacity: 1;
+}
+
+100% {
+transform: translate(20px, 120px) rotateX(-180deg) rotateY(-90deg) scale(0.5);
+opacity: 0;
+}
+    </style>
+</head>
+<body>
+<!-- Button 1 -->
+<a href="#">
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    Neon button
+</a>
+
+<!-- Button 2 -->
+<a href="#">
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    Neon button
+</a>
+
+<!-- Button 3 -->
+<a href="#">
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    Neon button
+</a>
+</body>
+<body ng-app="myApp" ng-controller="blobioController">
+
+<!-- Display Blobio information with glowing effect on the title -->
+<h1 class="glowing-title">Blobio Website</h1>
+
+<canvas id="background"></canvas>
+
+<!-- Include the new shader code -->
+<script id="fragment-shader" type="x-shader/x-fragment">
+    precision highp float;
+    uniform float time;
+    uniform vec2 resolution;
+    uniform sampler2D texture;
+    #define iGlobalTime time
+    #define iTime time
+    #define iResolution resolution.xy
+
+    mat2 mm2(in float a){float c = cos(a), s = sin(a);return mat2(c,s,-s,c);}
+    mat2 m2 = mat2(0.0, 0.29552, -0.0, 0.0);
+    float tri(in float x){return clamp(abs(fract(x)-.0),0.00,0.49);}
+    vec2 tri2(in vec2 p){return vec2(tri(p.x)+tri(p.y),tri(p.y+tri(p.x)));}
+
+    float triNoise2d(in vec2 p, float spd)
+    {
+        float z=1.8;
+        float z2=2.5;
+        float rz = 0.;
+        p *= mm2(p.x*0.06);
+        vec2 bp = p;
+        for (float i=0.; i<5.; i++ )
+        {
+            vec2 dg = tri2(bp*1.85)*.75;
+            dg *= mm2(time * 10.*spd);
+            p -= dg/z2;
+
+            bp *= 1.3;
+            z2 *= .45;
+            z *= .42;
+            p *= 1.21 + (rz-1.0)*.02;
+
+            rz += tri(p.x+tri(p.y))*z;
+            p*= -m2;
+        }
+        return clamp(1./pow(rz*29., 1.3),0.,.55);
+    }
+
+    float hash21(in vec2 n){ return fract(sin(dot(n, vec2(12.9898, 4.1414))) * 43758.5453); }
+    vec4 aurora(vec3 ro, vec3 rd)
+    {
+        vec4 col = vec4(0);
+        vec4 avgCol = vec4(0);
+
+        for(float i=0.;i<50.;i++)
+        {
+            float of = 0.006*hash21(gl_FragCoord.xy)*smoothstep(0.,15., i);
+            float pt = ((.8+pow(i,1.4)*.002)-ro.y)/(rd.y*2.+0.4);
+            pt -= of;
+            vec3 bpos = ro + pt*rd;
+            vec2 p = bpos.zx;
+            float rzt = triNoise2d(p, 0.06);
+            vec4 col2 = vec4(0,0,0, rzt);
+            col2.rgb = (sin(1.-vec3(2.15,-.5, 1.2)+i*0.043)*0.5+0.5)*rzt;
+            avgCol =  mix(avgCol, col2, .5);
+            col += avgCol*exp2(-i*0.065 - 2.5)*smoothstep(0.,5., i);
+        }
+
+        col *= (clamp(rd.y*15.+.4,0.,1.));
+
+        return col*1.8;
+    }
+
+    vec3 hash33(vec3 p)
+    {
+        p = fract(p * vec3(443.8975,397.2973, 491.1871));
+        p += dot(p.zxy, p.yxz+19.27);
+        return fract(vec3(p.x * p.y, p.z*p.x, p.y*p.z));
+    }
+
+    vec3 stars(in vec3 p)
+    {
+        vec3 c = vec3(0.);
+        float res = iResolution.x*1.;
+
+        for (float i=0.;i<4.;i++)
+        {
+            vec3 q = fract(p*(.15*res))-0.5;
+            vec3 id = floor(p*(.15*res));
+            vec2 rn = hash33(id).xy;
+            float c2 = 1.-smoothstep(0.,.6,length(q));
+            c2 *= step(rn.x,.0005+i*i*0.001);
+            c += c2*(mix(vec3(1.0,0.49,0.1),vec3(0.75,0.9,1.),rn.y)*0.1+0.9);
+            p *= 1.3;
+        }
+        return c*c*.8;
+    }
+
+    vec3 bg(in vec3 rd)
+    {
+        float sd = dot(normalize(vec3(-0.5, -0.6, 0.9)), rd)*0.5+0.5;
+        sd = pow(sd, 5.);
+        vec3 col = mix(vec3(0.05,0.1,0.2), vec3(0.1,0.05,0.2), sd);
+        return col*.63;
+    }
+
+    void mainImage( out vec4 fragColor, in vec2 fragCoord )
+    {
+        vec2 q = fragCoord.xy / iResolution.xy;
+        vec2 p = q - 0.5;
+        p.x*=iResolution.x/iResolution.y;
+
+        vec3 ro = vec3(0,0,-6.7);
+        vec3 rd = normalize(vec3(p,1.3));
+        rd.xz *= mm2(sin(time*0.05)*0.2);
+
+        vec3 col = vec3(0.);
+        vec3 brd = rd;
+        float fade = smoothstep(0.,0.01,abs(brd.y))*0.1+0.9;
+
+        col = bg(rd)*fade;
+
+        if (rd.y > 0.){
+            vec4 aur = smoothstep(0.,1.5,aurora(ro,rd))*fade;
+            col += stars(rd);
+            col = col*(1.-aur.a) + aur.rgb;
+        }
+        else //Reflections
+        {
+            rd.y = abs(rd.y);
+            col = bg(rd)*fade*0.6;
+            vec4 aur = smoothstep(0.0,2.5,aurora(ro,rd));
+            col += stars(rd)*0.1;
+            col = col*(1.-aur.a) + aur.rgb;
+            vec3 pos = ro + ((0.5-ro.y)/rd.y)*rd;
+            float nz2 = triNoise2d(pos.xz*vec2(.5,.7), 0.);
+            col += mix(vec3(0.2,0.25,0.5)*0.08,vec3(0.3,0.3,0.5)*0.7, nz2*0.4);
+        }
+
+        fragColor = vec4(col, 1);
+    }
+
+    void main( void ) {
+        vec4 colo = vec4(0.0);
+        mainImage(colo, gl_FragCoord.xy);
+        gl_FragColor = colo;
+    }
+</script>
+
+<!-- Include the shader code -->
+<script>
+    // Create a WebGL context
+    const canvas = document.getElementById('background');
+    const gl = canvas.getContext('webgl');
+
+    // Set the size of the canvas
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    // Set the shader source
+    const vertexShaderSource = `
+        attribute vec4 position;
+        void main() {
+            gl_Position = position;
+        }
+    `;
+
+    // Get the fragment shader source from the script tag
+    const fragmentShaderSource = document.getElementById('fragment-shader').text;
+
+    // Create shaders
+    const vertexShader = gl.createShader(gl.VERTEX_SHADER);
+    gl.shaderSource(vertexShader, vertexShaderSource);
+    gl.compileShader(vertexShader);
+
+    const fragmentShader = gl.createShader(gl.FRAGMENT_SHADER);
+    gl.shaderSource(fragmentShader, fragmentShaderSource);
+    gl.compileShader(fragmentShader);
+
+    // Create a shader program
+    const shaderProgram = gl.createProgram();
+    gl.attachShader(shaderProgram, vertexShader);
+    gl.attachShader(shaderProgram, fragmentShader);
+    gl.linkProgram(shaderProgram);
+    gl.useProgram(shaderProgram);
+
+    // Set the size of the WebGL viewport
+    gl.viewport(0, 0, canvas.width, canvas.height);
+
+    // Create a full-screen quad
+    const vertices = new Float32Array([
+        -1.0, -1.0,
+        1.0, -1.0,
+        -1.0, 1.0,
+        1.0, 1.0,
+    ]);
+
+    const vertexBuffer = gl.createBuffer();
+    gl.bindBuffer(gl.ARRAY_BUFFER, vertexBuffer);
+    gl.bufferData(gl.ARRAY_BUFFER, vertices, gl.STATIC_DRAW);
+
+    const positionAttrib = gl.getAttribLocation(shaderProgram, 'position');
+    gl.vertexAttribPointer(positionAttrib, 2, gl.FLOAT, false, 0, 0);
+    gl.enableVertexAttribArray(positionAttrib);
+
+    // Set uniform variables (e.g., time, resolution)
+    const timeUniform = gl.getUniformLocation(shaderProgram, 'time');
+    const resolutionUniform = gl.getUniformLocation(shaderProgram, 'resolution');
+    gl.uniform2f(resolutionUniform, canvas.width, canvas.height);
+
+    // Render the full-screen quad
+    function render() {
+        gl.clearColor(0.0, 0.0, 0.0, 0.0);
+        gl.clear(gl.COLOR_BUFFER_BIT);
+
+        gl.uniform1f(timeUniform, performance.now() * 0.001);
+
+        gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+
+        requestAnimationFrame(render);
+    }
+
+    render();
+</script>
+
+</body>
+
