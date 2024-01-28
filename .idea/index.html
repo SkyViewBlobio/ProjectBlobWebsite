@@ -1,14 +1,13 @@
+<!DOCTYPE html>
 <head>
     <title>Blobio Website</title>
 
     <!-- Add AngularJS and ngAnimate library -->
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular-animate.min.js"></script>
-    <!-- Add your custom style -->
-    <link rel="stylesheet" href=".idea/style.css">
 
-    <!-- Font Awesome for the "+" and "-" icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- Add your custom style -->
+    <link rel="stylesheet" href="style.css">
 
     <!-- AngularJS application -->
     <script type="text/javascript" src="app.js"></script>
@@ -17,304 +16,119 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Adjust the button-row position -->
     <style>
-        /* Pulsating effect */
-        @keyframes pulsate {
-            0% {
-                transform: scale(1);
-            }
-            50% {
-                transform: scale(1.1);
-            }
-            100% {
-                transform: scale(1);
-            }
-        }
-
-        /* Define text gradient and apply pulsating effect for <title> */
-        h1.gradient-text {
-            background: linear-gradient(to right, #4CAF50, #2196F3); /* Gradient from green to blue */
-            -webkit-background-clip: text;
-            color: transparent;
-            display: inline-block;
-            animation: pulsate 5s infinite, gradientCycle 5s infinite, glowPulse 5s infinite; /* Apply synchronized pulsating, gradient, and glow animations */
-            transition: transform 1.5s ease-in-out; /* Add a smooth transition effect on hover */
-            font-family: 'Ubuntu', sans-serif;
-        }
-
-        /* Apply animation on hover for <title> */
-        h1.gradient-text:hover {
-            transform: scale(1.2); /* Scale up the text on hover */
-        }
-
-        /* Center the text and adjust list item markers */
-        body {
-            text-align: center;
-            font-family: 'Ubuntu', sans-serif;
-        }
-
-        /* Full-screen quad for the background */
-        canvas {
-            position: fixed;
-            top: 0;
-            left: 0;
-            z-index: -1;
-            width: 100vw;
-            height: 100vh;
-        }
-
-        /* Glowing effect on the title */
         h1.glowing-title {
-            position: relative;
-            display: inline-block;
-            font-size: 2em;
-            font-weight: bold;
-            font-family: 'Ubuntu', sans-serif;
-            background: linear-gradient(to right, #4CAF50, #2196F3); /* Gradient from green to blue */
-            -webkit-background-clip: text;
-            color: transparent;
-            animation: pulsate 5s infinite, gradientCycle 5s infinite, glowCycle 5s infinite;
-            transition: transform 0.8s ease-in-out; /* Add a smooth transition effect on hover */
-        }
-
-        h1.glowing-title:hover {
-            transform: scale(1.2); /* Scale up the text on hover */
-        }
-
-        h1.glowing-title span::before {
-            content: attr(data-letter);
-            position: absolute;
-            top: 0;
-            left: 0;
-            z-index: -1;
-            color: transparent;
-            background: linear-gradient(to right, #4CAF50, #2196F3); /* Gradient from green to blue */
-            -webkit-background-clip: text;
-            clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
-            animation: glow 5s infinite; /* Adjust the animation duration as needed */
-        }
-
-        @keyframes gradientCycle {
-            0% {
-                background-position: 0% 0;
-            }
-            50% {
-                background-position: 100% 0;
-            }
-            100% {
-                background-position: 0% 0;
-            }
-        }
-
-        @keyframes glowCycle {
-            0%, 100% {
-                text-shadow: 0 0 10px rgba(76, 175, 80, 0);
-            }
-            50% {
-                text-shadow: 0 0 10px rgba(76, 175, 80, 1.0);
-            }
-        }
-
-        @keyframes glowPulse {
-            0% {
-                text-shadow: 0 0 10px rgba(76, 175, 80, 0);
-            }
-            50%, 100% {
-                text-shadow: 0 0 10px rgba(76, 175, 80, 1.0);
-            }
-        }
-        :root {
-  --glow-rgb: 50 205 50;
+    position: absolute;
+    top: -262px; /* Adjust the top margin as needed */
+    left: 32%;
+    transform: translateX(-50%);
+}
+/* Pulsating effect */
+@keyframes pulsate {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.1);
+    }
+    100% {
+        transform: scale(1);
+    }
 }
 
+/* Define text gradient and apply pulsating effect for <title> */
+h1.gradient-text {
+    background: linear-gradient(to right, #4CAF50, #2196F3); /* Gradient from green to blue */
+    -webkit-background-clip: text;
+    color: transparent;
+    display: inline-block;
+    animation: pulsate 5s infinite, gradientCycle 5s infinite, glowPulse 5s infinite; /* Apply synchronized pulsating, gradient, and glow animations */
+    transition: transform 1.5s ease-in-out; /* Add a smooth transition effect on hover */
+    font-family: 'Ubuntu', sans-serif;
+}
+
+/* Apply animation on hover for <title> */
+h1.gradient-text:hover {
+    transform: scale(1.2); /* Scale up the text on hover */
+}
+
+/* Center the text and adjust list item markers */
 body {
-  background: linear-gradient(145deg, rgb(119, 46, 195), rgb(58, 18, 153));
-  height: 100vh;
-  overflow: hidden;
+    text-align: center;
+    font-family: 'Ubuntu', sans-serif;
 }
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+/* Full-screen quad for the background */
+canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    width: 100vw;
+    height: 100vh;
 }
 
-.glow-point {
-  position: absolute;
-  box-shadow: 0rem 0rem 1.2rem 0.6rem rgb(var(--glow-rgb));
-  pointer-events: none;
+/* Glowing effect on the title */
+h1.glowing-title {
+    position: relative;
+    display: inline-block;
+    font-size: 2.8em;
+    font-weight: bold;
+    font-family: 'Ubuntu', sans-serif;
+    background: linear-gradient(to right, #4CAF50, #2196F3); /* Gradient from green to blue */
+    -webkit-background-clip: text;
+    color: transparent;
+    animation: pulsate 5s infinite, gradientCycle 5s infinite, glowCycle 5s infinite;
+    transition: transform 0.8s ease-in-out; /* Add a smooth transition effect on hover */
 }
 
-.star {
-  position: absolute;
-  z-index: 2;
-  color: white;
-  font-size: 1rem;
-  animation-duration: 1500ms;
-  animation-fill-mode: forwards;
-  pointer-events: none;
+h1.glowing-title:hover {
+    transform: scale(1.2); /* Scale up the text on hover */
 }
 
-@keyframes fall-1 {
-  0% {
-    transform: translate(0px, 0px) rotateX(45deg) rotateY(30deg) rotateZ(0deg) scale(0.25);
-    opacity: 0;
-  }
-
-  5% {
-    transform: translate(10px, -10px) rotateX(45deg) rotateY(30deg) rotateZ(0deg) scale(1);
-    opacity: 1;
-  }
-
-  100% {
-    transform: translate(25px, 200px) rotateX(180deg) rotateY(270deg) rotateZ(90deg) scale(1);
-    opacity: 0;
-  }
+h1.glowing-title span::before {
+    content: attr(data-letter);
+    position: absolute;
+    top: 10;
+    left: 0;
+    z-index: -1;
+    color: transparent;
+    background: linear-gradient(to right, #4CAF50, #2196F3); /* Gradient from green to blue */
+    -webkit-background-clip: text;
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+    animation: glow 5s infinite; /* Adjust the animation duration as needed */
 }
 
-@keyframes fall-2 {
-  0% {
-    transform: translate(0px, 0px) rotateX(-20deg) rotateY(10deg) scale(0.25);
-    opacity: 0;
-  }
-
-  10% {
-    transform: translate(-10px, -5px) rotateX(-20deg) rotateY(10deg) scale(1);
-    opacity: 1;
-  }
-
-  100% {
-    transform: translate(-10px, 160px) rotateX(-90deg) rotateY(45deg) scale(0.25);
-    opacity: 0;
-  }
+@keyframes gradientCycle {
+    0% {
+        background-position: 0% 0;
+    }
+    50% {
+        background-position: 100% 0;
+    }
+    100% {
+        background-position: 0% 0;
+    }
 }
 
-@keyframes fall-3 {
-  0% {
-    transform: translate(0px, 0px) rotateX(0deg) rotateY(45deg) scale(0.5);
-    opacity: 0;
-  }
-
-  15% {
-    transform: translate(7px, 5px) rotateX(0deg) rotateY(45deg) scale(1);
-    opacity: 1;
-  }
-
-  100% {
-    transform: translate(20px, 120px) rotateX(-180deg) rotateY(-90deg) scale(0.5);
-    opacity: 0;
-  }
-        :root {
---glow-rgb: 239 42 201;
+@keyframes glowCycle {
+    0%, 100% {
+        text-shadow: 0 0 10px rgba(76, 175, 80, 0);
+    }
+    50% {
+        text-shadow: 0 0 10px rgba(76, 175, 80, 1.0);
+    }
 }
 
-body {
-background: linear-gradient(145deg, rgb(119, 46, 195), rgb(58, 18, 153));
-height: 100vh;
-overflow: hidden;
-}
-
-* {
-margin: 0;
-padding: 0;
-box-sizing: border-box;
-}
-
-.glow-point {
-position: absolute;
-box-shadow: 0rem 0rem 1.2rem 0.6rem rgb(var(--glow-rgb));
-pointer-events: none;
-}
-
-.star {
-position: absolute;
-z-index: 2;
-color: white;
-font-size: 1rem;
-animation-duration: 1500ms;
-animation-fill-mode: forwards;
-pointer-events: none;
-}
-
-@keyframes fall-1 {
-0% {
-transform: translate(0px, 0px) rotateX(45deg) rotateY(30deg) rotateZ(0deg) scale(0.25);
-opacity: 0;
-}
-
-5% {
-transform: translate(10px, -10px) rotateX(45deg) rotateY(30deg) rotateZ(0deg) scale(1);
-opacity: 1;
-}
-
-100% {
-transform: translate(25px, 200px) rotateX(180deg) rotateY(270deg) rotateZ(90deg) scale(1);
-opacity: 0;
-}
-}
-
-@keyframes fall-2 {
-0% {
-transform: translate(0px, 0px) rotateX(-20deg) rotateY(10deg) scale(0.25);
-opacity: 0;
-}
-
-10% {
-transform: translate(-10px, -5px) rotateX(-20deg) rotateY(10deg) scale(1);
-opacity: 1;
-}
-
-100% {
-transform: translate(-10px, 160px) rotateX(-90deg) rotateY(45deg) scale(0.25);
-opacity: 0;
-}
-}
-
-@keyframes fall-3 {
-0% {
-transform: translate(0px, 0px) rotateX(0deg) rotateY(45deg) scale(0.5);
-opacity: 0;
-}
-
-15% {
-transform: translate(7px, 5px) rotateX(0deg) rotateY(45deg) scale(1);
-opacity: 1;
-}
-
-100% {
-transform: translate(20px, 120px) rotateX(-180deg) rotateY(-90deg) scale(0.5);
-opacity: 0;
+@keyframes glowPulse {
+    0% {
+        text-shadow: 0 0 10px rgba(76, 175, 80, 0);
+    }
+    50%, 100% {
+        text-shadow: 0 0 10px rgba(76, 175, 80, 1.0);
+    }
 }
     </style>
 </head>
-<body>
-<!-- Button 1 -->
-<a href="#">
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    Neon button
-</a>
-
-<!-- Button 2 -->
-<a href="#">
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    Neon button
-</a>
-
-<!-- Button 3 -->
-<a href="#">
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    Neon button
-</a>
-</body>
-<body ng-app="myApp" ng-controller="blobioController">
 
 <!-- Display Blobio information with glowing effect on the title -->
 <h1 class="glowing-title">Blobio Website</h1>
@@ -536,6 +350,47 @@ opacity: 0;
 
     render();
 </script>
+<!-- Button 1 -->
+<a href="#" ng-click="handleButtonClick('Updates')">
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    Updates
+</a>
 
-</body>
+<!-- Button 2 -->
+<a href="#" ng-click="handleButtonClick('AboutUs')">
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    About Us
+</a>
 
+<!-- Button 3 -->
+<a href="#" ng-click="handleButtonClick('Login')">
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    Login
+</a>
+
+<!-- Button 4 -->
+<a href="#" ng-click="handleButtonClick('Features')">
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    Features
+</a>
+
+<!-- Button 5 -->
+<a href="#" ng-click="handleButtonClick('Statistics')">
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    Statistics
+</a>

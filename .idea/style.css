@@ -18,10 +18,12 @@ body {
 
 a {
     position: relative;
+    right: 8.9%;
+    text-shadow: 0 0 10px #03ff00;
     display: inline-block;
     padding: 25px 30px;
     margin: 40px 0;
-    color: #03e9f4;
+    color: #FFFFFF;
     text-decoration: none;
     text-transform: uppercase;
     transition: 0.5s;
@@ -31,9 +33,9 @@ a {
 }
 
 a:hover {
-    background: #03e9f4;
+    background: #00ff00;
     color: #050801;
-    box-shadow: 0 0 5px #03e9f4, 0 0 25px #03e9f4, 0 0 50px #03e9f4, 0 0 200px #03e9f4;
+    box-shadow: 0 0 5px #00ff00, 0 0 25px #00ff00, 0 0 50px #00ff00, 0 0 200px #00ff00;
     -webkit-box-reflect: below 1px linear-gradient(transparent, #0005);
 }
 
@@ -55,8 +57,9 @@ a span:nth-child(1) {
     left: 0;
     width: 100%;
     height: 2px;
-    background: linear-gradient(90deg, transparent, #03e9f4);
-    animation: animate1 1s linear infinite;
+    background: linear-gradient(90deg, transparent, #00ff00);
+    animation: animate1 5s linear infinite;
+    animation-delay: 1s;
 }
 
 @keyframes animate1 {
@@ -73,9 +76,9 @@ a span:nth-child(2) {
     right: 0;
     width: 2px;
     height: 100%;
-    background: linear-gradient(180deg, transparent, #03e9f4);
-    animation: animate2 1s linear infinite;
-    animation-delay: 0.25s;
+    background: linear-gradient(180deg, transparent, #00ff00);
+    animation: animate2 5s linear infinite;
+    animation-delay: 2s;
 }
 
 @keyframes animate2 {
@@ -92,9 +95,9 @@ a span:nth-child(3) {
     right: 0;
     width: 100%;
     height: 2px;
-    background: linear-gradient(270deg, transparent, #03e9f4);
-    animation: animate3 1s linear infinite;
-    animation-delay: 0.50s;
+    background: linear-gradient(270deg, transparent, #ffffff);
+    animation: animate3 5s linear infinite;
+    animation-delay: 3s;
 }
 
 @keyframes animate3 {
@@ -111,9 +114,9 @@ a span:nth-child(4) {
     left: 0;
     width: 2px;
     height: 100%;
-    background: linear-gradient(360deg, transparent, #03e9f4);
-    animation: animate4 1s linear infinite;
-    animation-delay: 0.75s;
+    background: linear-gradient(360deg, transparent, #ffffff);
+    animation: animate4 5s linear infinite;
+    animation-delay: 4s;
 }
 
 @keyframes animate4 {
@@ -123,4 +126,130 @@ a span:nth-child(4) {
     50%, 100% {
         bottom: 100%;
     }
+}
+    /* button action */
+
+.tab-container {
+    position: fixed;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    width: 100%;
+    height: 0;
+    overflow: hidden;
+    transition: height 0.5s ease, opacity 0.5s ease;
+}
+
+.tab-content {
+    background: rgba(255, 255, 255, 0.2); /* Adjust the background color and opacity as needed */
+    border-radius: 10px;
+    padding: 20px;
+    filter: blur(10px); /* Adjust the blur strength as needed */
+    transition: filter 0.5s ease;
+}
+
+.tab-text {
+    font-size: 12px;
+    color: white;
+    text-align: center;
+    margin: 0;
+}
+
+.animate-down {
+    animation: animateDown 0.5s ease;
+}
+
+@keyframes animateDown {
+    from {
+        height: 0;
+    }
+    to {
+        height: auto;
+    }
+}
+
+:root {
+  --glow-rgb: 239 42 201;
+}
+
+body {
+  background: linear-gradient(145deg, rgb(119, 46, 195), rgb(58, 18, 153));
+  height: 100vh;
+  overflow: hidden;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.glow-point {
+  position: absolute;
+  box-shadow: 0rem 0rem 1.2rem 0.6rem rgb(var(--glow-rgb));
+  pointer-events: none;
+}
+
+.star {
+  position: absolute;
+  z-index: 2;
+  color: white;
+  font-size: 1rem;
+  animation-duration: 1500ms;
+  animation-fill-mode: forwards;
+  pointer-events: none;
+}
+
+@keyframes fall-1 {
+  0% {
+    transform: translate(0px, 0px) rotateX(45deg) rotateY(30deg) rotateZ(0deg) scale(0.25);
+    opacity: 0;
+  }
+
+  5% {
+    transform: translate(10px, -10px) rotateX(45deg) rotateY(30deg) rotateZ(0deg) scale(1);
+    opacity: 1;
+  }
+
+  100% {
+    transform: translate(25px, 200px) rotateX(180deg) rotateY(270deg) rotateZ(90deg) scale(1);
+    opacity: 0;
+  }
+}
+
+@keyframes fall-2 {
+  0% {
+    transform: translate(0px, 0px) rotateX(-20deg) rotateY(10deg) scale(0.25);
+    opacity: 0;
+  }
+
+  10% {
+    transform: translate(-10px, -5px) rotateX(-20deg) rotateY(10deg) scale(1);
+    opacity: 1;
+  }
+
+  100% {
+    transform: translate(-10px, 160px) rotateX(-90deg) rotateY(45deg) scale(0.25);
+    opacity: 0;
+  }
+}
+
+@keyframes fall-3 {
+  0% {
+    transform: translate(0px, 0px) rotateX(0deg) rotateY(45deg) scale(0.5);
+    opacity: 0;
+  }
+
+  15% {
+    transform: translate(7px, 5px) rotateX(0deg) rotateY(45deg) scale(1);
+    opacity: 1;
+  }
+
+  100% {
+    transform: translate(20px, 120px) rotateX(-180deg) rotateY(-90deg) scale(0.5);
+    opacity: 0;
+  }
 }
